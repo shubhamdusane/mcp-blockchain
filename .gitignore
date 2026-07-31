@@ -1,0 +1,11 @@
+node_modules/
+package-lock.json
+.env
+.env.*
+!.env.example
+npm-debug.log*
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/

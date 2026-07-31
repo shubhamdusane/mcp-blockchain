@@ -1,0 +1,20 @@
+{
+  "name": "mcp-blockchain",
+  "version": "0.1.0",
+  "description": "MCP server exposing blockchain data as native AI agent tools",
+  "type": "module",
+  "main": "server.js",
+  "bin": { "mcp-blockchain": "./server.js" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node test.mjs"
+  },
+  "keywords": ["mcp", "blockchain", "ethereum", "ai-agents", "web3", "defi"],
+  "author": "Shubham Dusane",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "ethers": "^6.0.0"
+  }
+}
