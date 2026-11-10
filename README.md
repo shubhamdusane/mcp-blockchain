@@ -44,7 +44,7 @@ Not yet published to npm — clone and run locally:
 ```bash
 git clone https://github.com/shubhamdusane/mcp-blockchain.git
 cd mcp-blockchain
-npm install
+npm ci
 node server.js
 ```
 
@@ -103,9 +103,17 @@ mcp-blockchain/
 
 Each tool exports a `tool` descriptor (name, description, JSON input schema) and an `execute` function. `server.js` registers them. Adding a tool means adding one file and one registration line.
 
+## Status & limitations
+
+- **Early (v0.1.0).** Two read-only tools. Not published to npm. Not audited.
+- **Tests:** `npm test` runs 11 offline smoke checks (tool descriptors, schemas, chain factory, address validation). No test calls a live RPC, so on-chain behaviour is not covered by CI. CI runs `npm ci --ignore-scripts && npm test`.
+- `get_token_holdings` needs an explicit token list; no auto-discovery.
+- Default RPCs are public and rate-limited; the server trusts whatever RPC endpoint you configure. Do not point it at an endpoint you do not trust.
+- Addresses passed to tools are sent to the configured RPC provider (privacy implication).
+
 ## Scope
 
-Read-only by design. No signing, no key handling, no transaction submission. An agent using this cannot move funds — it can only observe chain state.
+Read-only by design. The code contains no signer, wallet, private key, mnemonic or transaction-sending calls: it uses an ethers `JsonRpcProvider` (`getBalance`) and `Contract` instances built with a provider and a view-only ABI (`balanceOf`, `decimals`, `symbol`). It reads no secrets from the environment, only RPC URLs. An agent using this cannot move funds through this server; it can only observe chain state.
 
 ## Good First Issues
 
